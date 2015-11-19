@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 ruby '1.9.3'   # just in case - tell Heroku which Ruby version we need
 gem 'rails', '3.2.22'
 
+gem 'devise'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
