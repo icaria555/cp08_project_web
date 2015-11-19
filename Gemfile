@@ -4,6 +4,8 @@ ruby '1.9.3'   # just in case - tell Heroku which Ruby version we need
 gem 'rails', '3.2.22'
 
 gem 'devise'
+gem 'omniauth'
+gem 'omniauth-twitter'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
@@ -47,6 +49,5 @@ gem 'haml'
 group :development, :test do
   gem 'debugger'
 
-gem 'omniauth'
-gem 'omniauth-twitter'
+
 end
