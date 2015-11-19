@@ -1,3 +1,4 @@
+require "omniauth-facebook"
 Rails.application.config.middleware.use OmniAuth::Builder do
   provider :twitter, "7JE8AI6WUOF3czii9CvKTmbg6", "q5WDvWgAcIrxz11NjfXXhRZtOlngnlMJJ120Y5Yc9VFimeUh56"
                      #apikey                      apisecret
