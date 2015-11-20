@@ -6,6 +6,6 @@
   = render :partial => 'movie_form'
   = submit_tag 'Update Movie Info'
 
-  = button_tag "Cancel", :type => 'cancel', :name => 'cancel' # 4.4 the cancel link that goes back to the all movies page
+  = button_tag "Cancel", :type => 'cancel', :name => 'cancel' # 4.4 the cancel linkthat goes back to the all movies page
  %br
   = link_to 'Cancel for 4.5', movie_path(@movie) # 4.5 the cancel link to go back to viewing page of the movie that calcel the edition
