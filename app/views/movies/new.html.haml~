@@ -9,4 +9,5 @@
 
 
 = button_tag "Cancel", :type => 'cancel', :name => 'cancel' # 4.4 
+%br
 = link_to 'Cancel', movies_path # 4.5
