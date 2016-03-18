@@ -55,14 +55,17 @@ Newrotten::Application.routes.draw do
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
-  get 'movies/sortby/:sort' => 'movies#index',:as => 'sort'
-  resources :movies
+  # get 'movies/sortby/:sort' => 'users#index',:as => 'sort'
+  resources :users
 
   get '/login' => 'sessions#index' ,:as => 'login'
   root :to => redirect('/login')
 
-  match  '/auth/:provider/callback' => 'sessions#create'
+  #match  '/auth/:provider/callback' => 'sessions#create'
+  post '/login' => 'sessions#createSess'
+  
   get '/logout' => 'sessions#destroy'
   get  '/auth/failure' => 'sessions#failure'
+  post '/test' => 'sessions#tester'
   
 end

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '1.9.3'   # just in case - tell Heroku which Ruby version we need
+#gem 'ruby', '1.9.3'   # just in case - tell Heroku which Ruby version we need
 gem 'rails', '3.2.22'
 
 gem 'devise'
@@ -13,9 +13,14 @@ gem 'omniauth-twitter'
 group :development, :test do
   # make sure sqlite3 gem ONLY occurs inside development & test groups
   gem 'sqlite3' # use SQLite only in development and testing
+  gem 'mysql2'
+  gem 'test-unit'
 end
-
-gem 'pg'              # use PostgreSQL in production (Heroku)
+group :production do
+  # make sure sqlite3 gem ONLY occurs inside development & test groups
+  gem 'pg' 
+end
+             # use PostgreSQL in production (Heroku)
 gem 'rails_12factor'  # Heroku-specific production settings
 # Gems used only for assets and not required
 # in production environments by default.
@@ -46,8 +51,7 @@ gem 'jquery-rails'
 # use Haml for templates
 gem 'haml'
 # use Ruby debugger
-group :development, :test do
-  gem 'debugger'
+gem 'byebug'
 
 
-end
+

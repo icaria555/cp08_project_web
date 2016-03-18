@@ -1,0 +1,22 @@
+
+-# new.html.haml using partial
+ 
+%h2 Create New User
+   
+= form_tag '/users', :method => :post do
+  = label :user_n, :name, 'Name'
+  = text_field :user, 'name'
+  
+  = label :user_s, :name, 'Surname'
+  = text_field :user_sur, 'surname'
+  
+  = label :user_i, :name, 'User id'
+  = text_field :user, 'uid'
+  
+  = label :user_c, :name, 'User Class'
+  = select :user, :user_class, User.class_user
+  
+  = submit_tag 'Save Changes'
+
+= button_tag "Cancel", :type => 'button', :onclick => "location.href='/users'"
+  

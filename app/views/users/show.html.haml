@@ -1,0 +1,16 @@
+-# in app/views/movies/show.html.haml
+ 
+%h2 Details about #{@user.name}
+ 
+%table#Health_data
+  %thead
+    %tr
+      %th= "Spo2"
+      %th= "Hearth rate"
+      %th= "Update"
+  %tbody
+    - @user.health.each do |data|
+      %tr
+        %td= data.spo2
+        %td= data.h_rate
+        %td= data.created_at 

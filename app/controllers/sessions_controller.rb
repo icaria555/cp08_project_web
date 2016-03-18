@@ -3,8 +3,11 @@ class SessionsController < ApplicationController
   skip_before_filter :set_current_user
 
   def index
+    print "test enter index \n"
   end
 
+
+  #use for third auth
   def create
     auth=request.env["omniauth.auth"]
     user=Moviegoer.find_by_provider_and_uid(auth["provider"],auth["uid"]) ||
@@ -12,6 +15,13 @@ class SessionsController < ApplicationController
     session[:user_id] = user.id
     redirect_to movies_path
   end
+  
+  #create session for normal user
+  def createSess
+    user = params[":id"] 
+    
+  end
+  
   def destroy
     session.delete(:user_id)
     flash[:notice] = 'Logged out successfully.'
@@ -22,6 +32,13 @@ class SessionsController < ApplicationController
     redirect_to login_path
   end
   
+  def tester
+    print "start test \n"
+    print params[":id"]
+    print "\n"
+    render nothing: true
+    
+  end
 end
 
 
