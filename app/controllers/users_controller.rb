@@ -43,8 +43,7 @@ class UsersController < ApplicationController
   end
  
   def update
-    if params.key?('cancel')
-      flash[:notice] = "You have cancel your request."
+    if params.key?('cancel') 
       #redirect_to users_path
     else
       @user = User.find params[:id]

@@ -10,15 +10,14 @@ class SessionsController < ApplicationController
   #use for third auth
   def create
     auth=request.env["omniauth.auth"]
-    user=Moviegoer.find_by_provider_and_uid(auth["provider"],auth["uid"]) ||
-      Moviegoer.create_with_omniauth(auth)
+    user=User.find_by_uid(auth["uid"])
     session[:user_id] = user.id
     redirect_to movies_path
   end
   
   #create session for normal user
   def createSess
-    user = params[":id"] 
+    print params[:health]
     
   end
   
@@ -34,8 +33,13 @@ class SessionsController < ApplicationController
   
   def tester
     print "start test \n"
-    print params[":id"]
-    print "\n"
+
+    id = params[":uid"]
+    @user = User.find_by_uid(id)
+    print "test bug params health \n"
+    data = params[":spo2"].to_i,params[":h_rate"].to_i
+    @health_data = @user.health.create!(:spo2 => data[0],:h_rate => data[1])
+    print "end \n"
     render nothing: true
     
   end

@@ -5,17 +5,18 @@
 			- @user.errors.full_messages.each do |error|
 				%li= error
  
-= label :movie, :title, 'Title'
-= text_field :movie, 'title'
-
-
-
-= label :movie, :release_date, 'Released On'
-= date_select :movie, :release_date
-
--# For Project 4.7
-= label :movie, :description, 'Description'
-= text_area :movie, 'description'
+= label :user_n, :name, 'Name'
+= text_field :user, 'name'
+  
+= label :user_s, :name, 'Surname'
+= text_field :user_sur, 'surname'
+  
+= label :user_i, :name, 'User id'
+= text_field :user, 'uid'
+  
+= label :user_c, :name, 'User Class'
+= select :user, :user_class, User.class_user
+  
 
 <br><br>
 

@@ -1,19 +1,19 @@
 
 %h1 All users
- 
-%table#users
-  %thead
-    %tr
-      %th= "Name"
-      %th= "id"
-      %th= "Class"
-      %th More Info
-  %tbody
-    - @users.each do |user|
+%body
+  %table#users
+    %thead
       %tr
-        %td= link_to "#{user.name}", user_path(user)
-        %td= user.uid
-        %td= user.user_class 
-        %td= link_to "Edit", edit_user_path(user)
-        %td= link_to "Delete", user_path(user), :method => :delete
+        %th= "Name"
+        %th= "id"
+        %th= "Class"
+        %th{:colspan => "2"}= "More Info"
+    %tbody
+      - @users.each do |user|
+        %tr
+          %td= link_to "#{user.name}", user_path(user)
+          %td= user.uid
+          %td= user.user_class 
+          %td= link_to "Edit", edit_user_path(user)
+          %td= link_to "Delete", user_path(user), :method => :delete
 =link_to "Add new user", new_user_path

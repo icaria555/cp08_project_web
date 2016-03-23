@@ -52,6 +52,7 @@ gem 'jquery-rails'
 gem 'haml'
 # use Ruby debugger
 gem 'byebug'
-
+gem 'bootstrap-sass', '~> 3.2.0'
+gem 'autoprefixer-rails'
 
 
