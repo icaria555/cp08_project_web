@@ -17,8 +17,10 @@ class SessionsController < ApplicationController
   
   #create session for normal user
   def createSess
-    print params[:health]
-    
+    auth= params[:user]
+    user=User.find_by_uid(auth["uid"])
+    session[:user_id] = user.id
+    redirect_to movies_path
   end
   
   def destroy
@@ -31,7 +33,7 @@ class SessionsController < ApplicationController
     redirect_to login_path
   end
   
-  def tester
+  def recieve
     print "start test \n"
 
     id = params[":uid"]

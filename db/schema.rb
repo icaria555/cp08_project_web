@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(:version => 20160316075815) do
     t.integer  "user_id"
     t.string   "spo2"
     t.string   "h_rate"
+    t.string   "h_signal"
     t.datetime "check_date"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false

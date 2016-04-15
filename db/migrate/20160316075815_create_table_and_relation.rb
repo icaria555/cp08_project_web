@@ -12,6 +12,7 @@ class CreateTableAndRelation < ActiveRecord::Migration
       t.belongs_to :user, index:true
       t.string :spo2
       t.string :h_rate
+      t.string :h_signal
       t.datetime :check_date
 
       t.timestamps

@@ -59,13 +59,13 @@ Newrotten::Application.routes.draw do
   resources :users
 
   get '/login' => 'sessions#index' ,:as => 'login'
-  root :to => redirect('/login')
+  root :to => redirect('/users') #set default root page
 
   #match  '/auth/:provider/callback' => 'sessions#create'
   post '/login' => 'sessions#createSess'
   
   get '/logout' => 'sessions#destroy'
   get  '/auth/failure' => 'sessions#failure'
-  post '/test' => 'sessions#tester'
+  post '/test' => 'sessions#recieve'
   
 end

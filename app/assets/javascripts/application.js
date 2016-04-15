@@ -23,7 +23,7 @@ window.onload = function () {
 
 		var chart = new CanvasJS.Chart("chartContainer",{
 			title :{
-				text: "Live Random Data"
+				text: ""
 			},			
 			data: [{
 				type: "line",
@@ -32,14 +32,14 @@ window.onload = function () {
 		});
 
 		var xVal = 0;
-		var yVal = 100;	
-		var updateInterval = 100;
+		var yVal = 500;	
+		var updateInterval = 2000;
 		var dataLength = 500; // number of dataPoints visible at any point
 
-		var updateChart = function (count) {
+		var updateData= function (count) {
 			count = count || 1;
 			// count is number of times loop runs to generate random dataPoints.
-			
+
 			for (var j = 0; j < count; j++) {	
 				yVal = yVal +  Math.round(5 + Math.random() *(-5-5));
 				dps.push({
@@ -48,23 +48,25 @@ window.onload = function () {
 				});
 				xVal++;
 			};
-			if (dps.length > dataLength)
-			{
-				dps.shift();				
+			if (dps.length > dataLength) {
+				for(var i = 0; i < count; i++)
+				{	
+					dps.shift(count);				
+				}
 			}
-			
 			chart.render();		
-
+			
 		};
 
 		// generates first set of dataPoints
-		updateChart(dataLength); 
+		updateData(dataLength); 
 
 		// update chart after specified time. 
-		setInterval(function(){updateChart()}, updateInterval); 
+		setInterval(function(){updateData(200)}, updateInterval); 
 
 	}
 function test(){
+    var xhttp;
     
     alert("hello you suckker")
 }

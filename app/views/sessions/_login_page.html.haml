@@ -1,6 +1,8 @@
-#login
-  - if @current_user
-    %p.welcome  Welcome, #{@current_user.name}!
-    = link_to 'Log Out', logout_path
-  - else
-    %p.login= link_to 'Log in ', '/index'
+%ul
+  %li{:style => "float:right"}
+    #login
+      - if @current_user
+        #{@current_user.name}!
+        = link_to 'Log Out', logout_path
+      - else
+        = link_to 'Log in ', '/index'

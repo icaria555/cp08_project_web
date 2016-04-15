@@ -1,16 +1,52 @@
-%h2 #{@user.name}'s Health Data
-%label#testing test
-#chartContainer{:style => "height: 300px; width:100%;"}
+.header
+  %h2 #{@user.name}'s Health Data
+.panel
+  .panel-heading Health Status
+  .panel-body 
+    .h_status
+      .h_spo2
+        .panel_content
+          .left_side_panel
+            %labe SpO2
+          .right_side_panel
+            .big#heart  
+              - if @user.health.length != 0
+                #{@user.health.order("created_at").last.spo2} 
+              - else
+                0 
+            #h_status  %
+        
+    .h_status
+      .h_h_rate
+        .panel_content
+          .left_side_panel
+            %labe Heart Pulse 
+          .right_side_panel
+            .big#heart  
+              - if @user.health.length != 0
+                #{@user.health.order("created_at").last.h_rate} 
+              - else
+                0 
+            #h_status  bpm
+.panel
+  .panel-heading Heart Signal
+  .panel-body 
+    .chart
+      #chartContainer{:style => "height: 300px; width:100%;"}
 
-%table#users
-  %thead
-    %tr
-      %th= "Spo2"
-      %th= "Hearth rate"
-      %th= "Update"
-  %tbody
-    - @user.health.each do |data|
-      %tr
-        %td= data.spo2
-        %td= data.h_rate
-        %td= data.created_at 
+.panel
+  .panel-heading History update
+  .panel-body 
+    .table
+      %table#users
+        %thead
+          %tr
+            %th= "Spo2"
+            %th= "Hearth rate"
+            %th= "Update"
+        %tbody
+          - @user.health.order("created_at DESC").each do |data|
+            %tr
+              %td= data.spo2
+              %td= data.h_rate
+              %td= data.created_at 
