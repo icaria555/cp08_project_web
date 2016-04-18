@@ -86,9 +86,16 @@ h1,h2 {
 }
 
 .topnav {
-  
   font-size: 10pt;
-
+  background-color: black;
+  width:100%;
+}
+.footer {
+  font-size: 10pt;
+  background-color: black;
+  width:100%;
+  display: block;
+  padding:10px;
 }
 .h_status {
   color: white;
@@ -148,13 +155,15 @@ h1,h2 {
 
 
 .chart:before { clear: both; }
+
 #spo2 { font-size: 40pt; }
 #heart { font-size: 30pt; }
+#h_sig {font-size: 0pt; }
+
 ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  background-color: black;
   overflow: hidden;
 }
 li {

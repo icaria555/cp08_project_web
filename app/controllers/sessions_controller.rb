@@ -40,7 +40,7 @@ class SessionsController < ApplicationController
     @user = User.find_by_uid(id)
     print "test bug params health \n"
     data = params[":spo2"].to_i,params[":h_rate"].to_i
-    @health_data = @user.health.create!(:spo2 => data[0],:h_rate => data[1])
+    @health_data = @user.health.create!(:spo2 => data[0],:h_rate => data[1], :h_signal => params[":h_signal"])
     print "end \n"
     render nothing: true
     

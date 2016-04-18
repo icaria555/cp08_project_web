@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
     @user = User.find(id) # look up user by unique ID
     # will render app/views/users/show.html.haml by default
-    print @user.health
+    render json: @user.health if request.xhr?
   end
 
   def new
