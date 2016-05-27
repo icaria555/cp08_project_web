@@ -10,5 +10,5 @@ class User < ActiveRecord::Base
     self.name = self.name.split(/\s+/).map(&:downcase).map(&:capitalize).join(' ')
   end
 
-  def self.class_user ; %w[Admin User] ; end
+  def self.class_user ; %w[Admin Doctor Patient] ; end
 end

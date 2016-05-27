@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
     @user = User.find(id) # look up user by unique ID
     # will render app/views/users/show.html.haml by default
-    render json: @user.health if request.xhr?
+    render json: @user.health.order("created_at").last if request.xhr?
   end
 
   def new

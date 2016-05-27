@@ -5,11 +5,12 @@
     = stylesheet_link_tag 'application'
     = javascript_include_tag 'application'
     = csrf_meta_tags
- 
-  
   %body
     .topnav
+      .image
+        = image_tag("logo.png", alt: "Example Image", style: "width:200px;height:auto;")
       = render :partial=>'sessions/login_page'
+      
       -# this goes just inside %body:
       - if flash[:notice]
         #notice.message= flash[:notice]
@@ -18,4 +19,5 @@
     .content
       = yield
     .footer
-      .footerLeftText Create by Rungroj Kulapan ,Email : icosolar@hotmail.com
+      .footertxt
+        .footerLeftText Create by Rungroj Kulapan ,Email : icosolar@hotmail.com

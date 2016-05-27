@@ -63,7 +63,6 @@ Newrotten::Application.routes.draw do
 
   #match  '/auth/:provider/callback' => 'sessions#create'
   post '/login' => 'sessions#createSess'
-  
   get '/logout' => 'sessions#destroy'
   get  '/auth/failure' => 'sessions#failure'
   post '/test' => 'sessions#recieve'

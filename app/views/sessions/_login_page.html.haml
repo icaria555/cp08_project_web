@@ -1,8 +1,9 @@
-%ul
-  %li{:style => "float:right"}
-    #login
-      - if @current_user
-        #{@current_user.name}!
-        = link_to 'Log Out', logout_path
-      - else
-        = link_to 'Log in ', '/index'
+.topnavtxt
+  %ul
+    %li{:style => "float:right"}
+      #login
+        - if @current_user
+          #{@current_user.name}!
+          = link_to 'Log Out', logout_path
+        - else
+          = link_to 'Log in ', '/login'

@@ -13,139 +13,203 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
+
 //= require Chart.bundle
+//= require underscore-min
 //= require_tree .
-
-function test() {
-	var xhttp;
-
-	alert("hello you suckker")
-}
 
 
 //************************** chart config*************************************
 var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+var DAYS = ["Monday", "Tuesday", "Wendeday", "Thuesday", "Friday", "Satuauday", "Sunday"]
+
+var Da = _.range(100).map(function () { return '' })
+var Xlength = _.range(7).map(function () { return '' })
         
-var randomScalingFactor = function() {
-	return Math.round(Math.random() * 100);
-	//return 0;
-};
-var randomColorFactor = function() {
-    return Math.round(Math.random() * 255);
-};
+var default_data = _.range(100).map(function () { return 0 })
+var timeFormat = 'MM/DD/YYYY HH:mm';
 
-var randomColor = function(opacity) {
-    return 'rgba(' + randomColorFactor() + ',' + randomColorFactor() + ',' + randomColorFactor() + ',' + (opacity || '.3') + ')';
-};
-
-var default_data = Array.apply(null, {length: 100}).map(Function.call, Number)
-
-
-var config = {
+var config_heartsig = {
+    //config chart heart signal
     type: 'line',
     data: {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        labels: Da,
         datasets: [{
             data: default_data,
-            fill: false,
-            borderDash: [5, 5],
+            fill: true,
         }]
     },
     options: {
+        animationSteps: 5,
         responsive: true,
         title:{
             display:false,
             text:'Health Care'
         },
-        tooltips: {
-            mode: 'label',
-            callbacks: {
-                // beforeTitle: function() {
-                //     return '...beforeTitle';
-                // },
-                // afterTitle: function() {
-                //     return '...afterTitle';
-                // },
-                // beforeBody: function() {
-                //     return '...beforeBody';
-                // },
-                // afterBody: function() {
-                //     return '...afterBody';
-                // },
-                // beforeFooter: function() {
-                //     return '...beforeFooter';
-                // },
-                // footer: function() {
-                //     return 'Footer';
-                // },
-                // afterFooter: function() {
-                //     return '...afterFooter';
-                // },
+        elements:{
+            point:{
+                radius:0
             }
         },
-
+        legend: {
+            display: false
+        },
         hover: {
             mode: 'dataset'
         },
         scales: {
+            
             xAxes: [{
                 display: true,
                 scaleLabel: {
                     show: true,
-                    labelString: 'Month'
-                }
+                },
+                gridLines: {
+                    display: false
+                },
             }],
             yAxes: [{
-                display: true,
+                display: false,
+                gridLines: {
+                    display: false
+                },
                 scaleLabel: {
                     show: true,
                     labelString: 'Value'
                 },
                 ticks: {
-                    suggestedMin: -10,
-                    suggestedMax: 250,
+                    suggestedMin: 0,
+                    suggestedMax: 100,
+                }
+            }]
+        }
+    }
+};
+var color = "rgba(75,192,192,0.4)"
+var config_spo2 = {
+    //config chart heart signal
+    type: 'line',
+    data: {
+        labels: Xlength,
+        datasets: [{
+            data: default_data,
+            fill: false,
+            backgroundColor: color,
+            pointBorderColor: color,
+            borderColor: color,
+        }]
+    },
+    options: {
+        animationSteps: 5,
+        responsive: true,
+        title:{
+            display:false,
+            text:'Health Care'
+        },
+
+        legend: {
+            display: false
+        },
+        hover: {
+            mode: 'dataset'
+        },
+        scales: {
+            
+            xAxes: [{
+                display: true,
+                scaleLabel: {
+                    show: true,
+                },
+            }],
+            yAxes: [{
+                display: true,
+                gridLines: {
+                    display: true
+                },
+                scaleLabel: {
+                    show: true,
+                    labelString: 'Value'
+                },
+                ticks: {
+                    suggestedMin: 30,
+                    suggestedMax: 100,
                 }
             }]
         }
     }
 };
 
-$.each(config.data.datasets, function(i, dataset) {
-    dataset.borderColor = randomColor(0.4);
-    dataset.backgroundColor = randomColor(0.5);
-    dataset.pointBorderColor = randomColor(0.7);
-    dataset.pointBackgroundColor = randomColor(0.5);
-    dataset.pointBorderWidth = 1;
-});
-$( document ).ready(function() {
-	$('#randomizeData').click(function() {
-		console.log("pass")
-		alert($(location).attr('href'))
-	    $.each(config.data.datasets, function(i, dataset) {
-	        dataset.data = dataset.data.map(function() {
-	            return randomScalingFactor();
-	        });
-	
-	    });
-	    window.myLine.update();
-	});
-});
-
-var randomScalingFactor = function() {
-    return Math.round(Math.random() * 100);
-    //return 0;
-};
-
-var updateChart = function() {
-    //console.log($(this).attr('href'))
-	$.each(config.data.datasets, function(i, dataset) {
-        dataset.data = dataset.data.map(function() {
-            return randomScalingFactor();
-        });
-
+var updateChart = function(updata_data = "NoData"){
+    /* 
+    use for update Chart .It's only work for h_sig chart
+    input : update data(length equal with chart x length)
+    */
+    $.each(config_heartsig.data.datasets, function(i, dataset) {
+        //use for handle 304 code
+        if(!updata_data) {
+            dataset.data = default_data;
+        } else {
+            console.log(updata_data)
+            var recieve_data = updata_data.split(",").map(function(int){
+                return parseInt(int, 10);
+            });
+            console.log(recieve_data);
+            console.log('test');
+            dataset.data = recieve_data;
+        }
     });
-    $.ajax({url: $(location).attr('href'), success: function(result){
-        console.log(result)
+    window.myLine.update(); //update chart
+}
+
+var updateChart2 = function(updata_data = "NoData", chart){
+    /* 
+    use for update Chart .It's work for spo2 and h_rate chart
+    input : update data(length equal with chart x length), chart object
+    */
+    
+    chart.update(); //update chart
+}
+
+var updateData = function() {
+    /*
+    use for update chart and spo2, h_rate on show.html file by receive new data 
+    from server 
+    received data : h_signal, spo2, h_rate
+    */
+    $.ajax({url: $(location).attr('href'), type: "GET", ifModified:true, success: function(result, status, xhr){
+        if(status == "success"){
+            //use for handle 304 code
+            updateChart(result['h_signal']);
+            $("#spo2").text(result['spo2']);
+            $("#h_rate").text(result['h_rate']);
+            
+            $("#addtd").prepend("<tr><td>" + result['spo2'] + 
+            "</td><td>" + result['h_rate'] + 
+            "</td><td>" + result['updated_at'] + "</td></tr>")
+        }
+        console.log(status);
     }});
-    window.myLine.update();
+}
+var test = function(){
+    /* 
+    use for update Chart .It's work for spo2 and h_rate chart
+    input : update data(length equal with chart x length), chart object
+    */
+    var recieve_data = $("#spo2_data").text().split(",").map(function(int){
+                return parseInt(int, 10);
+            });
+    recieve_data.pop()//delete Nan element
+    return recieve_data
+}
+
+var test2 = function(){
+    /* 
+    use for update Chart .It's work for spo2 and h_rate chart
+    input : update data(length equal with chart x length), chart object
+    */
+    var recieve_data = $("#date_data").text().split(",").map(function(int){
+                return parseInt(int, 10);
+            });
+    recieve_data.pop()//delete Nan element
+    return recieve_data
 }
