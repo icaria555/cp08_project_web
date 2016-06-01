@@ -175,12 +175,15 @@ h1,h2 {
   display: block;
   clear: both;
 }
-
+.time_status {
+  padding-bottom: 10px;
+  text-align: right;
+}
 
 .chart:before { clear: both; }
 
 .big { font-size: 40pt; }
-#h_sig, #spo2_data, #date_data{ font-size: 0; }
+#h_sig, #spo2_data, #date_data, #h_rate_data{ font-size: 0px; }
 
 ul {
   list-style-type: none;

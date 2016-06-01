@@ -7,12 +7,17 @@
     updateChart($("#h_sig").text());
     
     var ctx2 = $("#spo2Chart")[0].getContext("2d");
-    config_spo2.data.datasets[0].data = test()
-    config_spo2.data.labels = test2()
-    console.log(config_spo2.labels)
-    console.log(config_spo2.data)
+    config_spo2.data.datasets[0].data = getValueX(10, "#spo2_data")
+    config_spo2.data.labels = getLabel(10, "#date_data")
+    console.log(config_spo2.labels + "label")
+    console.log(config_spo2.data + "data")
     console.log(config_spo2)
     window.myLine2 = new Chart(ctx2, config_spo2);
+    
+    var ctx3 = $("#h_rateChart")[0].getContext("2d");
+    config_h_rate.data.datasets[0].data = getValueX(10, "#h_rate_data")
+    config_h_rate.data.labels = getLabel(10, "#date_data")
+    window.myLine3 = new Chart(ctx3, config_h_rate);
     
     console.log("end window load")
   }
@@ -23,15 +28,17 @@
 .panel
   .panel-heading Health Status
   .panel-body 
+    .time_status#timedate
+      update at #{@user.health.order("check_date").last.check_date}
     .h_status
       .h_spo2
         .panel_content
           .left_side_panel
-            %labe SpO2
+            %label SpO2
           .right_side_panel
             .big#spo2  
               - if @user.health.length != 0
-                #{@user.health.order("created_at").last.spo2} 
+                #{@user.health.order("check_date").last.spo2} 
               - else
                 0 
             #h_status  %
@@ -39,11 +46,11 @@
       .h_h_rate
         .panel_content
           .left_side_panel
-            %labe Heart Pulse 
+            %label Heart Pulse 
           .right_side_panel
             .big#h_rate
               - if @user.health.length != 0
-                #{@user.health.order("created_at").last.h_rate} 
+                #{@user.health.order("check_date").last.h_rate} 
               - else
                 0 
             #h_status  bpm
@@ -54,19 +61,30 @@
         %canvas#heartChart{:style => "width: 100%; height: 300px;"}
       #h_sig 
         - if @user.health.length != 0
-          #{@user.health.order("created_at").last.h_signal} 
+          #{@user.health.order("check_date").last.h_signal} 
 
 .panel
   .panel-heading History update
   .panel-body
-    #spo2_data
-      - @user.health.order("updated_at DESC").each do |data|
-        #{data.spo2},
-    #date_data
-      - @user.health.order("updated_at DESC").each do |data|
-        #{data.updated_at},
-    .chart
-      %canvas#spo2Chart{:style => "width: 100%; height: 300px;"}
+    .panel
+      .panel-heading Spo2
+      .panel-body
+        #spo2_data
+          - @user.health.order("check_date").each do |data|
+            #{data.spo2},
+        #date_data
+          - @user.health.order("check_date").each do |data|
+            #{data.check_date},
+        .chart
+          %canvas#spo2Chart{:style => "width: 100%; height: 300px;"}
+    .panel
+      .panel-heading Heart Rate
+      .panel-body
+        #h_rate_data
+          - @user.health.order("check_date").each do |data|
+            #{data.h_rate},
+        .chart
+          %canvas#h_rateChart{:style => "width: 100%; height: 300px;"}
     .table
       %table#users
         %thead
@@ -75,8 +93,10 @@
             %th= "Hearth rate"
             %th= "Update"
         %tbody#addtd
-          - @user.health.order("updated_at DESC").each do |data|
+
+            
+          - @user.health.order("check_date DESC").each do |data|
             %tr
               %td= data.spo2
               %td= data.h_rate
-              %td= data.updated_at 
+              %td= data.check_date

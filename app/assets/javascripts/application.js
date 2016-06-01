@@ -23,12 +23,13 @@
 var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 var DAYS = ["Monday", "Tuesday", "Wendeday", "Thuesday", "Friday", "Satuauday", "Sunday"]
 
-var Da = _.range(100).map(function () { return '' })
+var signal_length = 200
+var Da = _.range(signal_length).map(function () { return '' })
 var Xlength = _.range(7).map(function () { return '' })
-        
-var default_data = _.range(100).map(function () { return 0 })
+         
+var default_data = _.range(signal_length).map(function () { return 0 })
 var timeFormat = 'MM/DD/YYYY HH:mm';
-
+var color = "rgba(226,48,48,1)"
 var config_heartsig = {
     //config chart heart signal
     type: 'line',
@@ -37,9 +38,13 @@ var config_heartsig = {
         datasets: [{
             data: default_data,
             fill: true,
+            backgroundColor: color,
+            pointBorderColor: color,
+            borderColor: color,
         }]
     },
     options: {
+        maintainAspectRatio: false,
         animationSteps: 5,
         responsive: true,
         title:{
@@ -138,6 +143,59 @@ var config_spo2 = {
         }
     }
 };
+var color = "rgba(226,48,48,1)"
+var config_h_rate = {
+    //config chart heart signal
+    type: 'line',
+    data: {
+        labels: Xlength,
+        datasets: [{
+            data: default_data,
+            fill: false,
+            backgroundColor: color,
+            pointBorderColor: color,
+            borderColor: color,
+        }]
+    },
+    options: {
+        animationSteps: 5,
+        responsive: true,
+        title:{
+            display:false,
+            text:'Health Care'
+        },
+
+        legend: {
+            display: false
+        },
+        hover: {
+            mode: 'dataset'
+        },
+        scales: {
+            
+            xAxes: [{
+                display: true,
+                scaleLabel: {
+                    show: true,
+                },
+            }],
+            yAxes: [{
+                display: true,
+                gridLines: {
+                    display: true
+                },
+                scaleLabel: {
+                    show: true,
+                    labelString: 'Value'
+                },
+                ticks: {
+                    suggestedMin: 0,
+                    suggestedMax: 120,
+                }
+            }]
+        }
+    }
+};
 
 var updateChart = function(updata_data = "NoData"){
     /* 
@@ -182,34 +240,43 @@ var updateData = function() {
             updateChart(result['h_signal']);
             $("#spo2").text(result['spo2']);
             $("#h_rate").text(result['h_rate']);
+            var date = new Date(result['check_date'])
+            $("#timedate").text(date.toString());
             
-            $("#addtd").prepend("<tr><td>" + result['spo2'] + 
-            "</td><td>" + result['h_rate'] + 
-            "</td><td>" + result['updated_at'] + "</td></tr>")
         }
         console.log(status);
     }});
 }
-var test = function(){
+var getValueX = function(datalength, tag){
     /* 
     use for update Chart .It's work for spo2 and h_rate chart
     input : update data(length equal with chart x length), chart object
     */
-    var recieve_data = $("#spo2_data").text().split(",").map(function(int){
+    var recieve_data = $(tag).text().split(",").map(function(int){
                 return parseInt(int, 10);
-            });
+    });
     recieve_data.pop()//delete Nan element
+    var shifttime =  recieve_data.length - datalength
+    for (i = 0 ; i < shifttime ; i++){
+        recieve_data.shift()
+    }
+    console.log(recieve_data)
     return recieve_data
 }
 
-var test2 = function(){
+var getLabel = function(datalength, tag){
     /* 
     use for update Chart .It's work for spo2 and h_rate chart
     input : update data(length equal with chart x length), chart object
     */
-    var recieve_data = $("#date_data").text().split(",").map(function(int){
-                return parseInt(int, 10);
-            });
+    var recieve_data = $(tag).text().split(",").map(function(time){
+        var format_time = time.trim().split(" ")
+        return format_time[0] + " " + format_time[1];
+    });
     recieve_data.pop()//delete Nan element
+    var shifttime =  recieve_data.length - datalength
+    for (i = 0 ; i < shifttime ; i++){
+        recieve_data.shift()
+    }
     return recieve_data
 }
