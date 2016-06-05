@@ -17,10 +17,23 @@ class SessionsController < ApplicationController
   
   #create session for normal user
   def createSess
+
     auth= params[:user]
-    user=User.find_by_uid(auth["uid"])
-    session[:user_id] = user.id
-    redirect_to movies_path
+    id_name = auth[:name]
+    @user=User.find_by_uid(id_name)
+    if(@user != nil)
+      if(@user.user_class == "Patient")
+        session[:user_id] = @user.id
+        redirect_to user_path(@user)
+      elsif (@user.user_class == "Doctor")
+        
+      else
+        
+      end
+    else
+      flash[:notice] = 'username is not correct'
+      redirect_to login_path
+    end
   end
   
   def destroy

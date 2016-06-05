@@ -10,7 +10,7 @@
       .image
         = image_tag("logo.png", alt: "Example Image", style: "width:200px;height:auto;")
       = render :partial=>'sessions/login_page'
-      
+    .noticenav
       -# this goes just inside %body:
       - if flash[:notice]
         #notice.message= flash[:notice]

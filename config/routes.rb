@@ -66,5 +66,6 @@ Newrotten::Application.routes.draw do
   get '/logout' => 'sessions#destroy'
   get  '/auth/failure' => 'sessions#failure'
   post '/test' => 'sessions#recieve'
+  #get '/user/doctor/'
   
 end

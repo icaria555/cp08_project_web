@@ -190,7 +190,7 @@ var config_h_rate = {
                 },
                 ticks: {
                     suggestedMin: 0,
-                    suggestedMax: 120,
+                    suggestedMax: 120,          
                 }
             }]
         }
@@ -219,7 +219,7 @@ var updateChart = function(updata_data = "NoData"){
     window.myLine.update(); //update chart
 }
 
-var updateChart2 = function(updata_data = "NoData", chart){
+var updateChart2 = function(updata_data = null, config_chart){
     /* 
     use for update Chart .It's work for spo2 and h_rate chart
     input : update data(length equal with chart x length), chart object
@@ -237,16 +237,24 @@ var updateData = function() {
     $.ajax({url: $(location).attr('href'), type: "GET", ifModified:true, success: function(result, status, xhr){
         if(status == "success"){
             //use for handle 304 code
-            updateChart(result['h_signal']);
-            $("#spo2").text(result['spo2']);
-            $("#h_rate").text(result['h_rate']);
-            var date = new Date(result['check_date'])
-            $("#timedate").text(date.toString());
-            
+            if(result == null){
+                
+            }
+            else{
+                updateChart(result['h_signal']);
+                $("#spo2").text(result['spo2']);
+                $("#h_rate").text(result['h_rate']);
+                var date = new Date(result['check_date'])
+                var day = date.getDay()
+                var month = date.getMonth()
+                var year = date.getFullYear()
+                $("#timedate").text("update at " + year + "-" + month + "-" + day);
+            }
         }
         console.log(status);
     }});
 }
+
 var getValueX = function(datalength, tag){
     /* 
     use for update Chart .It's work for spo2 and h_rate chart
@@ -271,7 +279,7 @@ var getLabel = function(datalength, tag){
     */
     var recieve_data = $(tag).text().split(",").map(function(time){
         var format_time = time.trim().split(" ")
-        return format_time[0] + " " + format_time[1];
+        return format_time[0] ;
     });
     recieve_data.pop()//delete Nan element
     var shifttime =  recieve_data.length - datalength

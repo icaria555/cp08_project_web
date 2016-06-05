@@ -1,4 +1,3 @@
-
 %h1 All users
 %body
   %table#users
@@ -6,7 +5,7 @@
       %th= "Name"
       %th= "id"
       %th= "Class"
-      %th{:colspan => "2"}= "More Info"
+      %th{:colspan => "2"}= "Option"
     %tbody
       - @users.each do |user|
         %tr
@@ -15,4 +14,5 @@
           %td= user.user_class 
           %td= link_to "Edit", edit_user_path(user)
           %td= link_to "Delete", user_path(user), :method => :delete
-=link_to "Add new user", new_user_path
+.button_right
+  =link_to "Add new user", new_user_path, class: "buttonAdd"

@@ -2,11 +2,10 @@
 %h1 Welcome to Health care center
 .login
   .login_content
-    = form_tag '/users', :method => :post do
-      = label :user_n, :name, 'Username'
-      = text_field :login_uid, 'name'
-        
+    = form_tag '/login', :method => :post do
+      = label :user_n, 'Username'
+      = text_field :user, :name
       = label :user_s, :name, 'Password'
-      = text_field :login_p, 'surname'
-
-    = submit_tag 'enter'
+      = text_field :user, :pass, onchange: ""
+      %br
+      = submit_tag 'enter'

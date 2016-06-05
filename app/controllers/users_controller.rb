@@ -22,7 +22,6 @@ class UsersController < ApplicationController
 
   #create user for stream data, user should have unique name, id
   def create
-
     params[:user][:name] = 
     params[:user][:name] + " " + params[:user_sur][:surname]
     @user = User.create!(params[:user])
