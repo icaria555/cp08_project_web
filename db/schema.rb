@@ -11,17 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160316075815) do
+ActiveRecord::Schema.define(:version => 20160619104329) do
 
-  create_table "doctors", :force => true do |t|
-    t.string   "name"
-    t.string   "uid"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "conversations", :force => true do |t|
+    t.integer  "sender_id"
+    t.integer  "reciever_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "healths", :force => true do |t|
-    t.integer  "patient_id"
+    t.integer  "user_id"
     t.string   "spo2"
     t.string   "h_rate"
     t.string   "h_signal"
@@ -30,16 +30,18 @@ ActiveRecord::Schema.define(:version => 20160316075815) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "patients", :force => true do |t|
-    t.string   "name"
-    t.string   "uid"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "messages", :force => true do |t|
+    t.integer  "conversation_id"
+    t.string   "massages"
+    t.integer  "read_unread"
+    t.datetime "time"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "relations", :force => true do |t|
+    t.integer  "user_id"
     t.integer  "patient_id"
-    t.integer  "doctor_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -47,6 +49,7 @@ ActiveRecord::Schema.define(:version => 20160316075815) do
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "uid"
+    t.string   "user_class"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

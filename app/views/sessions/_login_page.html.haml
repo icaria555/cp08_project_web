@@ -1,9 +1,11 @@
 .topnavtxt
-  %ul
-    %li{:style => "float:right"}
-      #login
-        - if @current_user
-          #{@current_user.name}!
-          = link_to 'Log Out', logout_path
-        - else
-          = link_to 'Log in ', '/login'
+  .topnavstat
+    #login
+      - if @current_user
+        .dropdown
+          = link_to @current_user.name, user_path(@current_user), class: 'dropbtn'
+          .dropdown-content
+            = link_to 'Log Out', logout_path
+      - else
+        = link_to 'Log in ', '/login'
+    

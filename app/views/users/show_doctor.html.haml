@@ -1,0 +1,19 @@
+%h1 All Patient
+%body
+  %table#users
+    %tr
+      %th= "Name"
+      %th= "id"
+      %th= "Class"
+      %th= "Option"
+    %tbody
+      - @user.relation.each do |relate|
+        - @patient = User.find_by_id(relate.patient_id)
+        - print relate
+        %tr
+          %td= link_to "#{@patient.name}", user_path(@patient)
+          %td= @patient.uid
+          %td= @patient.user_class 
+          %td= link_to "Delete", delete_relate_path(@user, @patient), :method => :delete
+.button_right
+  =link_to "Add Your Patient", new_relate_path(@user), class: "buttonAdd"

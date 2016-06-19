@@ -57,6 +57,9 @@ Newrotten::Application.routes.draw do
   # match ':controller(/:action(/:id))(.:format)'
   # get 'movies/sortby/:sort' => 'users#index',:as => 'sort'
   resources :users
+  get '/users/:id/new_relation' => 'users#new_relate', :as => 'new_relate'
+  post '/users/:id/new_relation' => 'users#create_relate'
+  delete '/users/:id/new_relation/:id2' => 'users#delete_relate', :as => 'delete_relate'
 
   get '/login' => 'sessions#index' ,:as => 'login'
   root :to => redirect('/users') #set default root page

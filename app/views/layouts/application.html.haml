@@ -8,7 +8,10 @@
   %body
     .topnav
       .image
-        = image_tag("logo.png", alt: "Example Image", style: "width:200px;height:auto;")
+        - if @current_user
+          = link_to image_tag("logo.png", alt: "Example Image", style: "width:200px;height:auto;"), user_path(@current_user)
+        - else
+          = link_to image_tag("logo.png", alt: "Example Image", style: "width:200px;height:auto;"), login_path
       = render :partial=>'sessions/login_page'
     .noticenav
       -# this goes just inside %body:

@@ -24,3 +24,5 @@ users = [
 users.each do |user|
   User.create!(user)
 end
+
+@userA = User.find_by_uid('icaria')

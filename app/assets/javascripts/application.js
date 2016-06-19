@@ -244,10 +244,12 @@ var updateData = function() {
                 updateChart(result['h_signal']);
                 $("#spo2").text(result['spo2']);
                 $("#h_rate").text(result['h_rate']);
-                var date = new Date(result['check_date'])
-                var day = date.getDay()
-                var month = date.getMonth()
-                var year = date.getFullYear()
+                var date = new Date(result['check_date'].split("T")[0]);
+                console.log("testttttttttttttttttttttt " + result['check_date'])
+                var day = date.getDate();
+                var month = date.getMonth() + 1;
+                var year = date.getFullYear();
+                console.log("update at " + year + "-" + month + "-" + day);
                 $("#timedate").text("update at " + year + "-" + month + "-" + day);
             }
         }
