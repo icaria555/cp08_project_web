@@ -49,6 +49,40 @@ class SessionsController < ApplicationController
     redirect_to login_path
   end
   
+  def findowner
+    @hard_name = params[":hardware_name"]
+    @user = params[":owner"]
+    @user_id = ''
+    if(@hard_name == 'none' and (@hard_name == 'none'))
+      @last_hardware = Hardware.order("create_at").last
+      @name_new = @last_hardware.name.split(" ")
+      @name_new = @name_new[0] + " " + (@name_new[1].to_i + 1).to_s
+      @hardware = Hardware.create!(:name => @name_new)
+      @hard_name = @name_new
+      @user = ''
+    elsif(@hard_name != 'none' and (@hard_name == 'none'))
+      @hardware = Hardware.find_by_name(@hard_name)
+      @user = ''
+    else
+      print @hard_name
+      @hardware = Hardware.find_by_name(@hard_name)
+      @hard_name = @hardware.name
+      if(@hardware.owner_id == nil)
+        @user = ''
+      else
+        @user = User.find(@hardware.owner_id)
+        @user_id = @user.id
+        @user = @user.name
+      end
+    end
+    render text: "#{@hard_name}_#{@user}_#{@user_id}", layout: false
+  end
+  
+  def belong
+    
+    render text: "success", layout: false
+  end
+  
   def recieve
     print "\n\n\n\n\n start test \n"
 

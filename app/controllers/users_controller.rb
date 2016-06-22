@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   def index
     @users = User.all
+    @hardwares = Hardware.all
     if(session[:user_id])
       @user = User.find_by_id(session[:user_id])
       print session[:user_id]
@@ -12,8 +13,12 @@ class UsersController < ApplicationController
     id = params[:id] # retrieve user ID from URI route
     @user = User.find(id) # look up user by unique ID
     if(@user.user_class == "Doctor")
-      @userAll = User.all
+      @users = User.all
       render template: "users/show_doctor"
+    elsif(@user.user_class == "Admin")
+      @users = User.all
+      @hardwares = Hardware.all
+      render template: "users/index"
     end
     # will render app/views/users/show.html.haml by default
     render json: @user.health.order("check_date").last if request.xhr?
@@ -55,9 +60,9 @@ class UsersController < ApplicationController
     @relation.destroy
     redirect_to user_path(@user)
   end
-
-  #create user for stream data, user should have unique name, id
+  
   def create
+    #create user for stream data, user should have unique name, id
     params[:user][:name] = 
     params[:user][:name] + " " + params[:user_sur][:surname]
     @user = User.create!(params[:user])
@@ -69,10 +74,23 @@ class UsersController < ApplicationController
       @user.destroy
       redirect_to new_user_path
     end
-    
   end
-# in users_controller.rb
- 
+  
+  def talk_tosomeone
+    id = params[:id] # retrieve user ID from URI route
+    @user = User.find(id) # look up user by unique ID
+    render template: "users/messenger"
+  end
+  
+  def sent
+    print "\n test teste tesetet"
+    print params["type"]["sender"]
+    
+    id = params[:id] # retrieve user ID from URI route
+    @user = User.find(id) # look up user by unique ID
+    redirect_to conversation_path(@user)
+  end
+  
   def edit
     @user = User.find params[:id]
   end

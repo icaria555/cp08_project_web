@@ -9,10 +9,31 @@
     %tbody
       - @users.each do |user|
         %tr
-          %td= link_to "#{user.name}", user_path(user)
+          %td= link_to "#{user.name} #{user.id}", user_path(user)
           %td= user.uid
           %td= user.user_class 
           %td= link_to "Edit", edit_user_path(user)
           %td= link_to "Delete", user_path(user), :method => :delete
 .button_right
   =link_to "Add new user", new_user_path, class: "buttonAdd"
+  
+%h1 All Hardwares
+%body
+  %table#users
+    %tr
+      %th= "Name"
+      %th= "Owner Name"
+      %th{:colspan => "2"}= "Option"
+    %tbody
+      - @hardwares.each do |h|
+        %tr
+          - if h.owner_id != nil
+            %td= link_to "#{@users[h.owner_id - 1].name}   #{h.owner_id}", user_path(@users[h.owner_id - 1])
+              
+          - else
+            %td None
+          %td= h.name
+          %td= link_to "Edit Owner", hardware_edit_path(h)
+          %td= link_to "Delete", delete_hardware_path(h), :method => :delete
+.button_right
+  =link_to "Add new hardware", new_hardware_path, class: "buttonAdd"

@@ -1,0 +1,2 @@
+= form_tag conversation_path(@user), :method => :post do
+    = text_field :type, 'sender', onkeydown: "if (event.keyCode == 13) { this.form.submit(); return false; }"

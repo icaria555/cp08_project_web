@@ -1,0 +1,22 @@
+%h2 Edit Hardware
+ 
+= form_tag hardware_edit_path(@hardware), :method => :put do
+  - unless @hardware.errors.empty?
+    #warning
+      Error prevented this user from being #{controller.action_name}d:
+      %ul
+      - @user.errors.full_messages.each do |error|
+        %li= error
+
+  = label :user_n, :name, 'Name'
+  = text_field :hardware, 'name'
+
+  = label :user_s, :name, 'Owner Name'
+  - if @user != nil
+    = text_field :hardware_else, 'owner_name', :value => '#{@user.uid}'
+  - else
+    = text_field :hardware_else, 'owner_name'
+  <br><br>
+  = submit_tag 'update Hardware Owner'
+<br>
+= button_tag "Cancel", :type => 'button', :onclick => "location.href='/users'"

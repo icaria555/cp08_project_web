@@ -6,9 +6,6 @@
 = form_tag new_relate_path(@user), :method => :post do
   = label :user_n, :name, 'Name'
   = text_field :user, 'name'
-  
-  
-  
   = submit_tag 'Save Changes'
 
 = button_tag "Cancel", :type => 'button', :onclick => "location.href='/users'"

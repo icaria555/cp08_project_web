@@ -7,19 +7,15 @@
     updateChart($("#h_sig").text());
     
     var ctx2 = $("#spo2Chart")[0].getContext("2d");
-    config_spo2.data.datasets[0].data = getValueX(10, "#spo2_data")
-    config_spo2.data.labels = getLabel(10, "#date_data")
-    console.log(config_spo2.labels + "label")
-    console.log(config_spo2.data + "data")
-    console.log(config_spo2)
+    config_spo2.data.datasets[0].data = getValueX(7, "#spo2_data")
+    config_spo2.data.labels = getLabel(7, "#date_data")
     window.myLine2 = new Chart(ctx2, config_spo2);
     
     var ctx3 = $("#h_rateChart")[0].getContext("2d");
-    config_h_rate.data.datasets[0].data = getValueX(10, "#h_rate_data")
-    config_h_rate.data.labels = getLabel(10, "#date_data")
+    config_h_rate.data.datasets[0].data = getValueX(7, "#h_rate_data")
+    config_h_rate.data.labels = getLabel(7, "#date_data")
     window.myLine3 = new Chart(ctx3, config_h_rate);
     
-    console.log("end window load")
   }
   setInterval(function() { updateData() }, 10000);
 
@@ -68,6 +64,7 @@
 .panel
   .panel-heading History update
   .panel-body
+    = select_tag("size", options_for_select([["week", 7], ["month", 30], ["all", 50]]), :onchange => "updateChart2(this.value);")
     .panel
       .panel-heading Spo2
       .panel-body

@@ -107,6 +107,7 @@ var config_spo2 = {
     options: {
         animationSteps: 5,
         responsive: true,
+        showXLabels: 7,
         title:{
             display:false,
             text:'Health Care'
@@ -160,6 +161,7 @@ var config_h_rate = {
     options: {
         animationSteps: 5,
         responsive: true,
+        showXLabels: 7,
         title:{
             display:false,
             text:'Health Care'
@@ -219,13 +221,30 @@ var updateChart = function(updata_data = "NoData"){
     window.myLine.update(); //update chart
 }
 
-var updateChart2 = function(updata_data = null, config_chart){
+var updateChart2 = function(size_number){
     /* 
     use for update Chart .It's work for spo2 and h_rate chart
     input : update data(length equal with chart x length), chart object
     */
+    config_spo2.data.datasets[0].data = getValueX(size_number, "#spo2_data")
+    config_spo2.data.labels = getLabel(size_number, "#date_data")
+
     
-    chart.update(); //update chart
+    config_h_rate.data.datasets[0].data = getValueX(size_number, "#h_rate_data")
+    config_h_rate.data.labels = getLabel(size_number, "#date_data")
+    
+    
+    if(size_number == 50) {
+        config_spo2.options.showXLabels = 5;
+        config_h_rate.options.showXLabels = 5;
+        
+    } else {
+        config_spo2.options.showXLabels = 7;
+        config_h_rate.options.showXLabels = 7;
+    }
+    console.log("updateCHart2")
+    window.myLine2.update(); //update chart
+    window.myLine3.update(); //update chart
 }
 
 var updateData = function() {
@@ -290,3 +309,4 @@ var getLabel = function(datalength, tag){
     }
     return recieve_data
 }
+

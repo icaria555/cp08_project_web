@@ -60,6 +60,9 @@ Newrotten::Application.routes.draw do
   get '/users/:id/new_relation' => 'users#new_relate', :as => 'new_relate'
   post '/users/:id/new_relation' => 'users#create_relate'
   delete '/users/:id/new_relation/:id2' => 'users#delete_relate', :as => 'delete_relate'
+  get 'users/:id/talk' => 'users#talk_tosomeone'
+  get 'users/:id/talk/:id2' => 'users#talk_tosomeone', :as => 'conversation'
+  post 'users/:id/talk/:id2' => 'users#sent', :as => 'conversation'
 
   get '/login' => 'sessions#index' ,:as => 'login'
   root :to => redirect('/users') #set default root page
@@ -68,7 +71,13 @@ Newrotten::Application.routes.draw do
   post '/login' => 'sessions#createSess'
   get '/logout' => 'sessions#destroy'
   get  '/auth/failure' => 'sessions#failure'
-  post '/test' => 'sessions#recieve'
-  #get '/user/doctor/'
+  post '/senddata' => 'sessions#recieve'
   
+  post '/owner' => 'sessions#findowner'
+  post '/belong' => 'sessions#belong'
+  put '/hardwares/:id/edit' => 'hardwares#update', :as => 'hardware_edit'
+  get '/hardwares/:id/edit' => 'hardwares#edit_owner'
+  get '/hardwares/new' => 'hardwares#new', :as => 'new_hardware'
+  
+  delete '/users/delete' => 'hardwares#delete', :as => 'delete_hardware'
 end

@@ -54,5 +54,5 @@ gem 'haml'
 gem 'byebug'
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
-
+gem 'momentjs-rails', '~> 2.11', '>= 2.11.1'
 
