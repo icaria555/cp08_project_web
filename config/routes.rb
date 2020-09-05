@@ -62,7 +62,7 @@ Newrotten::Application.routes.draw do
   delete '/users/:id/new_relation/:id2' => 'users#delete_relate', :as => 'delete_relate'
   get 'users/:id/talk' => 'users#talk_tosomeone'
   get 'users/:id/talk/:id2' => 'users#talk_tosomeone', :as => 'conversation'
-  post 'users/:id/talk/:id2' => 'users#sent', :as => 'conversation'
+  post 'users/:id/talk/:id2' => 'users#sent', :as => 'conversation2'
 
   get '/login' => 'sessions#index' ,:as => 'login'
   root :to => redirect('/users') #set default root page

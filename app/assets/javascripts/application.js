@@ -209,12 +209,9 @@ var updateChart = function(updata_data = "NoData"){
         if(!updata_data) {
             dataset.data = default_data;
         } else {
-            console.log(updata_data)
-            var recieve_data = updata_data.split(",").map(function(int){
+            let recieve_data = updata_data.split(",").map(function(int){
                 return parseInt(int, 10);
             });
-            console.log(recieve_data);
-            console.log('test');
             dataset.data = recieve_data;
         }
     });
@@ -242,7 +239,6 @@ var updateChart2 = function(size_number){
         config_spo2.options.showXLabels = 7;
         config_h_rate.options.showXLabels = 7;
     }
-    console.log("updateCHart2")
     window.myLine2.update(); //update chart
     window.myLine3.update(); //update chart
 }
@@ -264,11 +260,9 @@ var updateData = function() {
                 $("#spo2").text(result['spo2']);
                 $("#h_rate").text(result['h_rate']);
                 var date = new Date(result['check_date'].split("T")[0]);
-                console.log("testttttttttttttttttttttt " + result['check_date'])
                 var day = date.getDate();
                 var month = date.getMonth() + 1;
                 var year = date.getFullYear();
-                console.log("update at " + year + "-" + month + "-" + day);
                 $("#timedate").text("update at " + year + "-" + month + "-" + day);
             }
         }

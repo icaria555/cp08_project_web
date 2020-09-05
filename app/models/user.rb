@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :name, :uid, :user_class
+  #attr_accessible :name, :uid, :user_class
   validates :name, :presence => true , :length => { :maximum => 30 }, uniqueness: true
   validates :user_class, :presence => true
   validates :uid, :presence => true

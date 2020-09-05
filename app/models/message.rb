@@ -1,5 +1,5 @@
 class Message < ActiveRecord::Base
-  attr_accessible :massages, :read_unread, :time
+  #attr_accessible :massages, :read_unread, :time
   belongs_to :conversation
   validates :massages, :presence => true
   validates :read_unread, :presence => true

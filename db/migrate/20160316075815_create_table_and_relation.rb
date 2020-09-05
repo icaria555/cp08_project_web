@@ -1,4 +1,4 @@
-class CreateTableAndRelation < ActiveRecord::Migration
+class CreateTableAndRelation < ActiveRecord::Migration[5.0]
   def up
     create_table :users do |t|
       t.string :name

@@ -1,11 +1,10 @@
 source 'https://rubygems.org'
-
-#gem 'ruby', '1.9.3'   # just in case - tell Heroku which Ruby version we need
-gem 'rails', '3.2.22'
-
+gem 'rails', '6.0.3'
+gem 'railties', '6.0.3'
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-twitter'
+gem 'activeresource', require: 'active_resource'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
@@ -25,8 +24,8 @@ gem 'rails_12factor'  # Heroku-specific production settings
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+  gem 'sass-rails'
+  gem 'coffee-rails'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
@@ -52,7 +51,6 @@ gem 'jquery-rails'
 gem 'haml'
 # use Ruby debugger
 gem 'byebug'
-gem 'bootstrap-sass', '~> 3.2.0'
+gem 'bootstrap-sass', '~> 3.4.1'
 gem 'autoprefixer-rails'
 gem 'momentjs-rails', '~> 2.11', '>= 2.11.1'
-
