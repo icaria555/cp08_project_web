@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_filter :set_current_user
+  before_action :set_current_user
   layout "application"
   protected # prevents method from being invoked by a route
   def set_current_user

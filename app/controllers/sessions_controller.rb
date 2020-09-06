@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   # user shouldn't have to be logged in before logging in!
-  skip_before_filter :set_current_user
+  skip_before_action :set_current_user
   @@limit_health_size = 50 #limit health model size
   
   def index
