@@ -25,10 +25,7 @@ class SessionsController < ApplicationController
     auth= params[:user]
     id_name = auth[:name]
     @current_user = User.find_by_uid(id_name)
-    #a = @current_user.health
-    #a.delete_all
 
-    print "\n\n\n\n\n ffffffffffffffffffffffffffffff"
     if(@current_user != nil)
       session[:user_id] = @current_user.id
       redirect_to user_path(@current_user)

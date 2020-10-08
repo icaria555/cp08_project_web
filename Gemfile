@@ -9,12 +9,16 @@ gem 'activeresource', require: 'active_resource'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+gem 'bcrypt', '~> 3.1.13' 
 
 group :development, :test do
   # make sure sqlite3 gem ONLY occurs inside development & test groups
   gem 'sqlite3' # use SQLite only in development and testing
   gem 'mysql2'
   gem 'test-unit'
+  gem 'rspec-rails', ">= 3.9.0"
+  gem 'webpacker', '>=3.0'
+  gem 'shoulda-matchers'
 end
 group :production do
   # make sure sqlite3 gem ONLY occurs inside development & test groups

@@ -9,14 +9,17 @@
 users = [
   {:name => 'Rungroj Kulapan',
   :uid => 'icaria',
+  :password => '123456',
   :user_class => 'Patient'
   },
   {:name => 'Angkachat Taeprasert',
   :uid => 'angkachat',
+  :password => '123456',
   :user_class => 'Patient'
   },
   {:name => 'Kota Keta',
   :uid => 'kotaketa',
+  :password => '123456',
   :user_class => 'Doctor'
   },
 ]
@@ -24,5 +27,3 @@ users = [
 users.each do |user|
   User.create!(user)
 end
-
-@userA = User.find_by_uid('icaria')

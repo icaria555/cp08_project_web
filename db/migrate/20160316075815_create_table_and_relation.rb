@@ -13,7 +13,6 @@ class CreateTableAndRelation < ActiveRecord::Migration[5.0]
       t.string :h_rate
       t.string :h_signal
       t.datetime :check_date
-
       t.timestamps
     end
     

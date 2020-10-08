@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2016_06_22_143030) do
+ActiveRecord::Schema.define(version: 2020_09_11_072025) do
 
   create_table "conversations", force: :cascade do |t|
     t.integer "sender_id"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 2016_06_22_143030) do
     t.string "user_class"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "password"
   end
 
 end
