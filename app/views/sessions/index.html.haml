@@ -3,9 +3,9 @@
 .login
   .login_content
     = form_tag '/login', :method => :post do
-      = label :user_n, 'Username'
-      = text_field :user, :name
-      = label :user_s, :name, 'Password'
-      = text_field :user, :pass, onchange: ""
+      = label :user_n, 'Username', class: "login_label"
+      = text_field :user, :name, class: "login_input"
+      = label :user_s, :name, 'Password', class:"login_label"
+      = text_field :user, :pass, onchange: "", class:"login_input"
       %br
       = submit_tag 'enter', class: "button_login"
